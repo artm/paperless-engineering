@@ -1,7 +1,7 @@
 # Mention any apps you've built or projects you've enjoyed working on
 
 For the last 12 years I have been working at [V2\_Lab][1.1] on a wide
-variety of art and culture related projects involving computers or
+variety of art and culture related projects involving software or
 electronics or both. The projects I'm most proud of are on [my
 resume][2.2], among those that just didn't make it into the top N are:
 
