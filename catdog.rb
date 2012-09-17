@@ -39,7 +39,14 @@ class Animal
       end
     [winner, delta.abs]
   end
+end
 
+# assuming some animals are better trained than others (or are smarter / lazier by nature)
+class TacticalAnimal < Animal
+  def full_distance(d)
+    # tactical animal adjusts the length of the last leap to avoid overshooting
+    2.0 * d
+  end
 end
 
 cat = Animal.new "Cat", 2.0
