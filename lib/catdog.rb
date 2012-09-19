@@ -6,11 +6,6 @@
 # distance before turning around. (Cat has a better chance of winning since she can only
 # overshoot by 1 foot on integer (odd) feet distances and dog by either 1 or 2)
 
-Distance = ARGV[0].to_f
-if Distance <= 0 or ARGV.count == 0
-  puts "\nUsage: ruby catdog.rb DISTANCE\nWhere DISTANCE is positive\n\n"
-  exit 1
-end
 
 class Animal
   attr_reader :name
@@ -49,13 +44,4 @@ class TacticalAnimal < Animal
   end
 end
 
-cat = Animal.new "Cat", 2.0
-dog = Animal.new "Dog", 3.0
-winner, delta = Animal.race(cat,dog,Distance)
-if winner
-  # round the delta to make output appear integer
-  puts "#{winner.name} wins by #{delta.round} feet"
-else
-  puts 'Draw'
-end
 
