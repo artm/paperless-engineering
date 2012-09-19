@@ -6,10 +6,11 @@
 
 
 class Animal
-  attr_reader :name, :leap
-  def initialize name, leap
+  attr_reader :name, :leap, :leap_time
+  def initialize name, leap, args={}
     @name = name
     @leap = leap
+    @leap_time = args[:leap_time] || 0
   end
 
   def full_distance(d)

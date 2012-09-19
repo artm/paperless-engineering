@@ -14,6 +14,12 @@ describe Animal do
     @dog.leap.should == 3
   end
 
+  it 'can accept leap duration' do
+    @cat.leap_time.should == 0
+    @cat = Animal.new 'Cat', 2, leap_time: 2
+    @cat.leap_time.should == 2
+  end
+
   it 'overshoots when appropriate' do
     @cat.full_distance(1).should == 4
     @cat.full_distance(2).should == 4
