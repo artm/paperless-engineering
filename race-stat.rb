@@ -13,10 +13,14 @@ races = 0
 
 trap 'EXIT' do
   puts "\r  \nIn #{races} races"
+  rest = 100 # start with 100%
   wins.each do |animal, cnt|
-    puts "#{animal.name} won #{cnt} times (#{100*cnt/races}%)"
+    percent = (100.0*cnt/races).round
+    rest -= percent # take away each animal's integer percents
+    puts "#{animal.name} won #{cnt} times (#{percent}%)"
   end
-  puts "There was #{draws} draws (#{100*draws/races}%)"
+  # use that to display psychologically sound draw percentage
+  puts "There was #{draws} draws (#{rest}%)"
 end
 
 while true
