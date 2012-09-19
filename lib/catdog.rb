@@ -6,7 +6,7 @@
 
 
 class Animal
-  attr_reader :name
+  attr_reader :name, :leap
   def initialize name, leap
     @name = name
     @leap = leap

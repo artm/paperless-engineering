@@ -10,6 +10,10 @@ describe Animal do
     @cat.name.should == 'Cat'
   end
 
+  it 'reports its leaps' do
+    @dog.leap.should == 3
+  end
+
   it 'overshoots when appropriate' do
     @cat.full_distance(1).should == 4
     @cat.full_distance(2).should == 4
