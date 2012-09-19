@@ -7,7 +7,7 @@ resume][2.2], among those that just didn't make it into the top N are:
 
  * [Beijerkoppen][1.2] - talking heads on the street of Rotterdam, our
    software continuously records satellite / terrestrial TV programs and
-   searches for what looks like a news programs. With a little help of a
+   searches for what looks like news programs. With a little help of a
    maintainer it eventually learns to capture and keep only fragments of
    a newsreaders which are then continuously played back on three large
    screens. The software is a wild mix of ruby, C++, perl and various
