@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 # the animals run with equal speed (6 feet per unit of time)
 #
 # the only way one of them will win the race is if the other overshoots the mark by a larger
@@ -16,7 +14,7 @@ class Animal
 
   def full_distance(d)
     # how many full leaps this animal needs to cover (and possibly overshoot) the distance?
-    full_leaps = (d/@leap).ceil
+    full_leaps = (d.to_f/@leap).ceil
     # full distance in feet there and back
     2.0 * full_leaps * @leap
   end
