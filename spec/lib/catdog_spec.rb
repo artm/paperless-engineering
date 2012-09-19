@@ -14,12 +14,6 @@ describe Animal do
     @dog.leap.should == 3
   end
 
-  it 'can accept leap duration' do
-    @cat.leap_time.should == 0
-    @cat = Animal.new 'Cat', 2, leap_time: 2
-    @cat.leap_time.should == 2
-  end
-
   it 'overshoots when appropriate' do
     @cat.full_distance(1).should == 4
     @cat.full_distance(2).should == 4
@@ -50,6 +44,23 @@ describe Animal do
     Animal.race(@cat,@dog,7).should == [@cat, 2]
     Animal.race(@cat,@dog,8).should == [@cat, 2]
   end
+
+  describe 'simulated animal' do
+    before do
+      @sim_cat = Animal.new 'Cat', 2, leap_time: 2
+      @sim_dog = Animal.new 'Dog', 3, leap_time: 3
+    end
+
+    it 'can accept leap duration' do
+      @cat.leap_time.should == 0
+      @sim_cat.leap_time.should == 2
+    end
+
+    it 'can simulate a leap' do
+      @sim_cat.simulate_leap.should == [2, 2]
+    end
+  end
+
 end
 
 describe TacticalAnimal do

@@ -20,6 +20,10 @@ class Animal
     2.0 * full_leaps * @leap
   end
 
+  def simulate_leap
+    [@leap, @leap_time]
+  end
+
   def Animal.race(a,b,distance)
     # by the time the winner crosses the finish line, the looser still has to go another delta.abs
     delta = a.full_distance(distance) - b.full_distance(distance)
