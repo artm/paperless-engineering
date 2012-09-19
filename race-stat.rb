@@ -2,16 +2,20 @@
 
 require_relative 'lib/catdog'
 
-cat = Animal.new "Cat", 2.0
-dog = Animal.new "Dog", 3.0
 rnd = Random.new
 
+# race participants
+cat = Animal.new "Cat", 2.0
+dog = Animal.new "Dog", 3.0
+
+# stats
 wins = Hash.new 0
 draws = 0
 races = 0
 
-
+# print stats on exit
 trap 'EXIT' do
+  # keeping up appearances: the \r and spaces are to remove ^C from output
   puts "\r  \nIn #{races} races"
   rest = 100 # start with 100%
   wins.each do |animal, cnt|
@@ -23,11 +27,13 @@ trap 'EXIT' do
   puts "There was #{draws} draws (#{rest}%)"
 end
 
+# keep racing
 while true
   distance = rnd.rand(20...1000)
-  winner, delta = Animal.race(cat, dog, distance)
 
+  # we don't want to be interrupted while processing a race
   trap 'INT', 'IGNORE'
+  winner, delta = Animal.race cat, dog, distance
   races += 1
   printf "Distance: %3d, ", distance
   if winner
@@ -38,6 +44,8 @@ while true
     draws += 1
     puts 'Draw'
   end
+
+  # give the user a chance to break
   trap('INT') { exit }
-  sleep 0.01 # give user a chance to break
+  sleep 0.01
 end
