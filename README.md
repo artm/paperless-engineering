@@ -1,12 +1,18 @@
 guide to the solution
 =====================
 
-1. race.rb - solution driver, just call it like `ruby race.rb DISTANCE`
+1. race.rb - original solution driver, just call it like `ruby race.rb DISTANCE`
 
 2. race-stat.rb - Monte Carlo race, call like `ruby race-stat.rb`, stop
    the competition by issuing INT signal (Ctrl+C on most sane systems).
    This version will run multiple races and collect simple statistics to
    prove Cat's superiority over Dog.
+
+3. race-sim.rb - solution using discrete event simulation - makes little
+   sense in the simple case as formulated, but could be useful if the
+   animals were more alive and get tired or agitated and their speed
+   would vary from leap to leap. Call it like `ruby race-sim.rb
+DISTANCE`
 
 paperless receipts engineering jobs
 ===================================
