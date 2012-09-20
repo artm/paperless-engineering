@@ -8,18 +8,18 @@ resume][2.2], among those that just didn't make it into the top N are:
  * [Beijerkoppen][1.2] - talking heads on the street of Rotterdam, our
    software continuously records satellite / terrestrial TV programs and
    searches for what looks like news programs. With a little help of a
-   maintainer it eventually learns to capture and keep only fragments of
-   a newsreaders which are then continuously played back on three large
+   maintainer it eventually learns to capture and keep only fragments with
+   newsreaders which are then continuously played back on three large
    screens. The software is a wild mix of ruby, C++, perl and various
    unix utilities set up to glue together the capture, intelligence,
-   display and maintainers web interface.
+   display and maintainer's web interface.
  * [Run Motherfucker Run][1.3] - a treadmill controlled interactive
    movie projection. I wrote the network controlled video player and a
    non-linear plot description language that allowed the artist to
    describe how movie progression depends on participant's behavior.
  * [Physiognomic Scrutinizer][1.4] and [Mirror Piece][1.5] - a series of
    interactive works (culminating in [15 Minutes of Biometric Fame][1.6]),
-   that misuse face recognition technology for amusement of festival
+   that mis-use face recognition technology for amusement of festival
    goers and museum visitors. All three works detect faces in the
    audience and search for "matching" faces in their databases of
    (in)famous persons, wrapping the process in a security gate, fancy
@@ -38,7 +38,7 @@ resume][2.2], among those that just didn't make it into the top N are:
 Is he gone then?
 
 I'm quite indifferent towards clippy as I prefer plain text formats
-anyway.
+myself.
 
 "Oh, but your resume is in PDF"
 
