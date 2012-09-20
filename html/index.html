@@ -53,16 +53,13 @@
         animal.position = startPoint;
         animal.dir = 1.0;
         animal.max_d = Math.ceil(distance/animal.leap) * animal.leap;
-        console.log("max d " + animal.max_d)
       }
 
       // place everybody
       function resetRace() {
-
         startPoint = new Point( margins[0], view.center.y );
         finishPoint = new Point( view.size.width - margins[1], view.center.y );
         distance = (finishPoint.x - startPoint.x) / PPF;
-        console.log("distance:" + distance);
 
         ground.removeChildren();
         ground.moveTo(0, view.center.y);
@@ -98,11 +95,12 @@
         resetRace();
       }
 
+      // leap curve
       function ease(t) {
         return Math.sin( 3.142 * t );
       }
 
-
+      // animal animation / simulation step
       function advance(animal, dt) {
         var d = (animal.position.x - startPoint.x) / PPF + dt * animal.dir;
 
@@ -114,13 +112,12 @@
           d = 0.0;
         }
 
-        console.log("d = " + d);
-
         var leap_t = (d % animal.leap) / animal.leap; // how far along a leap it is
         var world_pos = new Point( d, ease(leap_t) * animal.leap * 0.3 );
         animal.position = world_pos * [PPF,-PPF] + startPoint;
       }
 
+      // advance animation by time elapsed since the last frame
       function onFrame(event) {
         var dt = event.delta * sym_speed;
 
