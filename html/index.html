@@ -1,17 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<title></title>
-		<meta name="description" content="" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<link rel="stylesheet" type="text/css" media="all" href="css/screen.css" />
-		<!--[if lt IE 9]>
-			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-		<script type="text/javascript" src="js/jquery-1.7.min.js"></script>
-		<script type="text/javascript" src="js/global.js"></script>
-	</head>
-<body>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>paperless race</title>
+    <meta name="description" content="" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="stylesheet" type="text/css" media="all" href="css/screen.css" />
+    <!--
+    see http://stackoverflow.com/questions/9252608/why-scrollbars-appear-when-i-resize-the-canvas
+    -->
+    <style> #racetrack { display: block; } </style>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="js/paper.js"></script>
+    <script type="text/paperscript" canvas="racetrack">
+      // constants
+      var PPF = 50; // pixel per feet
+      var margins = [0.5*PPF, 3.1*PPF];
+      var sym_speed = 4;
+
+      // geometry and characters
+      var ground = new CompoundPath();
+
+      var flag = new Path();
+      flag.strokeColor = 'black';
+      flag.fillColor = '#EEEEEE';
+      flag.moveTo(0,0)
+      flag.lineBy(0,-20);
+      flag.lineBy(10,0);
+      flag.lineBy(0,10);
+      flag.lineBy(-10,0);
+      var flag_offset = [flag.bounds.width/2, -flag.bounds.height/2];
+
+      var fsym = new Symbol(flag);
+      var start_flag, finish_flag;
+
+      var cat = new Path.Circle( new Point(0,0), 2.5 );
+      cat.strokeColor = 'black';
+      cat.leap = 2;
+
+      var dog = new Path.Rectangle( new Point(0,0), new Size(7,7) );
+      dog.strokeColor = 'black';
+      dog.leap = 3;
+
+      var startPoint;
+      var finishPoint;
+      var distance;
+
+      function prepareRacer(animal) {
+        animal.position = startPoint;
+        animal.dir = 1.0;
+        animal.max_d = Math.ceil(distance/animal.leap) * animal.leap;
+        console.log("max d " + animal.max_d)
+      }
+
+      // place everybody
+      function resetRace() {
+
+        startPoint = new Point( margins[0], view.center.y );
+        finishPoint = new Point( view.size.width - margins[1], view.center.y );
+        distance = (finishPoint.x - startPoint.x) / PPF;
+        console.log("distance:" + distance);
+
+        ground.removeChildren();
+        ground.moveTo(0, view.center.y);
+        // by this time there is a backmost child, so we can set its stroke
+        ground.strokeColor = 'grey';
+        ground.lineBy(view.size.width, 0);
+        for(var x = margins[0] + PPF ; x < view.size.width ; x+= PPF) {
+          ground.moveTo( x, view.center.y );
+          ground.lineBy( 0, 10 );
+        }
+
+        if (!start_flag) {
+          start_flag = fsym.place(startPoint + flag_offset );
+        } else {
+          start_flag.position = startPoint + flag_offset;
+        }
+        if (!finish_flag) {
+          finish_flag = fsym.place(finishPoint + flag_offset);
+        } else {
+          finish_flag.position = finishPoint + flag_offset;
+        }
+        prepareRacer(cat);
+        prepareRacer(dog);
+      }
+
+      resetRace();
+
+      function onResize() {
+        resetRace();
+      }
+
+      function onMouseDown() {
+        resetRace();
+      }
+
+      function ease(t) {
+        return Math.sin( 3.142 * t );
+      }
+
+
+      function advance(animal, dt) {
+        var d = (animal.position.x - startPoint.x) / PPF + dt * animal.dir;
+
+        if ( animal.dir > 0.0 && d > animal.max_d ) {
+          animal.dir = -1.0;
+          d = animal.max_d;
+        } else if (animal.dir < 0.0 && d < 0.0) {
+          animal.dir = 0;
+          d = 0.0;
+        }
+
+        console.log("d = " + d);
+
+        var leap_t = (d % animal.leap) / animal.leap; // how far along a leap it is
+        var world_pos = new Point( d, ease(leap_t) * animal.leap * 0.3 );
+        animal.position = world_pos * [PPF,-PPF] + startPoint;
+      }
+
+      function onFrame(event) {
+        var dt = event.delta * sym_speed;
+
+        advance(cat,dt);
+        advance(dog,dt);
+      }
+
+    </script>
+  </head>
+  <body>
+    <canvas id="racetrack" resize></canvas>
+  </body>
 </html>
