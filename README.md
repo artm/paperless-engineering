@@ -12,7 +12,15 @@ guide to the solution
    sense in the simple case as formulated, but could be useful if the
    animals were more alive and get tired or agitated and their speed
    would vary from leap to leap. Call it like `ruby race-sim.rb
-DISTANCE`
+   DISTANCE`
+
+4. html/index.html - visualisation of the race using javascript and
+   [paper.js][1]. The algorithm combines overshooting formula form (1)
+   and a very simple animation system. Distance depends on browser
+   width, race can be restarted by clicking anywhere or resizing the
+   window.
+
+[1]: http://paperjs.org/
 
 paperless receipts engineering jobs
 ===================================
